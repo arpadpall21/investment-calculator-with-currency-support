@@ -7,10 +7,22 @@ def read_input_toml(path: str):
 
 
 def calculate_investment():
-    input = read_input_toml('./input.toml')
+    input = read_input_toml("./input.toml")
+    sum = input["start_sum"]
 
-    for currency, value in input['start_sum'].items():
-        print(f"Initial sum {currency}: {value}")
+    for currency, value in sum.items():
+        print(f"Start Sum {currency}: {value}")
+
+    for investment_year in range(1, input["years_to_invest"]['years'] + 1):
+        print(f"\nReport at the end of year {investment_year}")
+
+        for currency, yearly_interest_rate in input["yearly_interest_rate"].items():
+            print(f"Currency: {currency}")
+            gained_as_interest = sum[currency] / 100 * yearly_interest_rate
+            total_at_the_end_of_the_year = sum[currency] + gained_as_interest
+
+            print(f"  Gained as interest: {gained_as_interest}")
+            print(f"  Total at the end of the year: {total_at_the_end_of_the_year}")
 
 
 if __name__ == "__main__":

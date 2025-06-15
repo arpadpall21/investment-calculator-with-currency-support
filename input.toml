@@ -7,9 +7,9 @@ RON = 5.03
 [years_to_invest]
 years = 5
 [yearly_interest_rate]
-RON = 5.20
-HUF = 6.50
-EUR = 1.35
+RON = 10
+HUF = 10
+EUR = 10
 
 [start_sum]
 EUR = 10_000
