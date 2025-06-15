@@ -8,6 +8,7 @@ def read_input_toml(path: str):
 
 def calculate_investment():
     input = read_input_toml("./input.toml")
+    displayed_decimal_length = input['settings']['displayed_decimal_length']
     sum = input["start_sum"]
 
     for currency, value in sum.items():
@@ -17,12 +18,13 @@ def calculate_investment():
         print(f"\nReport at the end of year {investment_year}")
 
         for currency, yearly_interest_rate in input["yearly_interest_rate"].items():
-            print(f"Currency: {currency}")
+            print(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)")
             gained_as_interest = sum[currency] / 100 * yearly_interest_rate
             total_at_the_end_of_the_year = sum[currency] + gained_as_interest
+            sum[currency] = total_at_the_end_of_the_year
 
-            print(f"  Gained as interest: {gained_as_interest}")
-            print(f"  Total at the end of the year: {total_at_the_end_of_the_year}")
+            print(f"   Gained as interest: {round(gained_as_interest, displayed_decimal_length)}")
+            print(f"   Total sum at the end of the year: {round(total_at_the_end_of_the_year, displayed_decimal_length)}")
 
 
 if __name__ == "__main__":
