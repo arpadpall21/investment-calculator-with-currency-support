@@ -2,3 +2,6 @@
 
 ## Description
 - 
+
+## Requirements
+ - Python v3.11+
