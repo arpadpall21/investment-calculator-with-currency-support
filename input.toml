@@ -15,7 +15,7 @@ EUR = 10_000
 RON = 50_000
 HUF = 4_000_000
 [yearly_investment]
-HUF = 100_000
+EUR = 10_000
 
 
 [settings]
