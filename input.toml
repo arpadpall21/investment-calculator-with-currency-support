@@ -1,4 +1,4 @@
-output_curency = "EUR"
+output_currency = "EUR"
 [exchange_rate]
 HUF = 402.80
 RON = 5.03

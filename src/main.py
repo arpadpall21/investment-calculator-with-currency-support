@@ -1,20 +1,21 @@
 from tomllib import load
+from misc.calc_accumulation import cacl_accumulation_in_output_currency
 
 
 def read_input_toml(path: str):
-    with open(path, 'br') as f:
+    with open(path, "br") as f:
         return load(f)
 
 
 def calculate_investment():
     input = read_input_toml("./input.toml")
-    displayed_decimal_length = input['settings']['displayed_decimal_length']
+    displayed_decimal_length = input["settings"]["displayed_decimal_length"]
     sum = input["start_sum"]
 
     for currency, value in sum.items():
         print(f"Start Sum {currency}: {value}")
 
-    for investment_year in range(1, input["years_to_invest"]['years'] + 1):
+    for investment_year in range(1, input["years_to_invest"]["years"] + 1):
         print(f"\nReport at the end of year {investment_year}")
         yearly_accumulation = {}
 
@@ -25,7 +26,7 @@ def calculate_investment():
             print(f"    Gained as interest: {round(gained_as_interest, displayed_decimal_length)} {currency}")
 
             yearly_accumulation[currency] = {}
-            yearly_accumulation[currency]['gained_as_interest'] = gained_as_interest
+            yearly_accumulation[currency]["gained_as_interest"] = gained_as_interest
 
             if input["yearly_investment"].get(currency):
                 print(f"    Yearly investment: {input["yearly_investment"][currency]} {currency}")
@@ -34,17 +35,19 @@ def calculate_investment():
                     "    Total including yearly investment: " +
                     f"{round(total_at_year_end_yearly_invest_inc, displayed_decimal_length)} {currency}"
                 )
-                yearly_accumulation[currency]['total'] = total_at_year_end_yearly_invest_inc
+                yearly_accumulation[currency]["total"] = total_at_year_end_yearly_invest_inc
                 sum[currency] = total_at_year_end_yearly_invest_inc
             else:
                 print(f"    Total: {round(total_at_year_end, displayed_decimal_length)} {currency}")
-                yearly_accumulation[currency]['total'] = total_at_year_end
+                yearly_accumulation[currency]["total"] = total_at_year_end
                 sum[currency] = total_at_year_end
 
-        print('---', yearly_accumulation)
-        print(f"Total in target currency {input["output_curency"]}")
-        print(f"    Gained as interest: {input["output_curency"]}")
-        print(f"    Total: {input["output_curency"]}")
+        gained_as_interest_yearly, total_yearly = cacl_accumulation_in_output_currency(yearly_accumulation,
+                                                                                       input["exchange_rate"],
+                                                                                       input["output_currency"])
+        print(f"Total in output currency {input["output_currency"]}")
+        print(f"    Gained as interest: {gained_as_interest_yearly} {input["output_currency"]}")
+        print(f"    Total: {total_yearly} {input["output_currency"]}")
 
 
 if __name__ == "__main__":
