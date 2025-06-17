@@ -1,5 +1,4 @@
-[output_curency]
-EUR = 1
+output_curency = "EUR"
 [exchange_rate]
 HUF = 402.80
 RON = 5.03
@@ -16,7 +15,7 @@ EUR = 10_000
 RON = 50_000
 HUF = 4_000_000
 [yearly_investment]
-EUR = 10_000
+HUF = 100_000
 
 
 [settings]

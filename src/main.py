@@ -20,19 +20,29 @@ def calculate_investment():
         for currency, yearly_interest_rate in input["yearly_interest_rate"].items():
             print(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)")
             gained_as_interest = sum[currency] / 100 * yearly_interest_rate
-            total_at_the_end_of_the_year = sum[currency] + gained_as_interest
-            sum[currency] = total_at_the_end_of_the_year
+            total_at_year_end = sum[currency] + gained_as_interest
 
-            print(f"   Gained as interest: {round(gained_as_interest, displayed_decimal_length)}")
-            print(f"   Total sum at the end of the year: {round(total_at_the_end_of_the_year, displayed_decimal_length)}")
+            print(f"    Gained as interest: {round(gained_as_interest, displayed_decimal_length)}")
+
+            if input["yearly_investment"].get(currency):
+                print(f"    Yearly investment: {input["yearly_investment"][currency]}")
+
+                total_at_year_end_yearly_invest_inc = total_at_year_end + input["yearly_investment"][currency]
+                print(
+                    "    Total sum at the end of the year including yearly investment: " +
+                    f"{round(total_at_year_end_yearly_invest_inc, displayed_decimal_length)}"
+                )
+                sum[currency] = total_at_year_end_yearly_invest_inc
+            else:
+                print(f"    Total sum at the end of the year: {round(total_at_year_end, displayed_decimal_length)}")
+                sum[currency] = total_at_year_end
+
+
+        # print(f"Yearly report in target currency ({input["output_curency"]})")
 
 
 if __name__ == "__main__":
     calculate_investment()
-
-
-
-
 
 
 # monthly_investment_huf = 700_000
