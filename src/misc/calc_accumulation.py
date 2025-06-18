@@ -18,4 +18,5 @@ def cacl_accumulation_in_output_currency(
         total_interest += report["gained_as_interest"] / exchange_rate[currency]
         total += report["total"] / exchange_rate[currency]
 
+
     return total_interest, total
