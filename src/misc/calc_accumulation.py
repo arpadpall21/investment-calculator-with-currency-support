@@ -15,4 +15,7 @@ def cacl_accumulation_in_output_currency(
         if not exchange_rate.get(currency):
             raise ValueError(f"Exchange rate missing for currency {currency}")
 
+        total_interest += report["gained_as_interest"] / exchange_rate[currency]
+        total += report["total"] / exchange_rate[currency]
+
     return total_interest, total

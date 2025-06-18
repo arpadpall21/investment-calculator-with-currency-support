@@ -46,8 +46,9 @@ def calculate_investment():
                                                                                        input["exchange_rate"],
                                                                                        input["output_currency"])
         print(f"Total in output currency {input["output_currency"]}")
-        print(f"    Gained as interest: {gained_as_interest_yearly} {input["output_currency"]}")
-        print(f"    Total: {total_yearly} {input["output_currency"]}")
+        print(f"    Gained as interest: {round(gained_as_interest_yearly, displayed_decimal_length)}" +
+              f"{input["output_currency"]}")
+        print(f"    Total: {round(total_yearly, displayed_decimal_length)} {input["output_currency"]}")
 
 
 if __name__ == "__main__":
