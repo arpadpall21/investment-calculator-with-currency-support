@@ -1,10 +1,10 @@
-output_curency = "EUR"
+output_currency = "EUR"
 [exchange_rate]
 HUF = 402.80
 RON = 5.03
 
 [years_to_invest]
-years = 5
+years = 2
 [yearly_interest_rate]
 EUR = 1.35
 RON = 5.2
