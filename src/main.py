@@ -38,15 +38,16 @@ def calculate_investment():
                     f"{round(total_accumulation[currency], displayed_decimal_length)} {currency}"
                 )
 
-        total = cacl_accumulation_in_output_currency(total_accumulation,
-                                                     input["exchange_rate"], input["output_currency"])
+        total_in_output_currency = cacl_accumulation_in_output_currency(total_accumulation,
+                                                                        input["exchange_rate"],
+                                                                        input["output_currency"])
         total_yearly_interest_in_output_currency = cacl_accumulation_in_output_currency(yearly_interest_accumulation,
                                                                                         input["exchange_rate"],
                                                                                         input["output_currency"])
         print(f"Total in output currency {input["output_currency"]}")
         print("    Gained as interest this year: "
               f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
-        print(f"    Total: {round(total, displayed_decimal_length)} {input["output_currency"]}")
+        print(f"    Total: {round(total_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
 
 
 if __name__ == "__main__":
