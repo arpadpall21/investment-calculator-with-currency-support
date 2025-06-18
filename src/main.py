@@ -49,6 +49,8 @@ def calculate_investment():
               f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
         print(f"    Total: {round(total_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
 
+    print(total_accumulation)
+
 
 if __name__ == "__main__":
     calculate_investment()
