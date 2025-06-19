@@ -1,5 +1,6 @@
 from misc.input import input
 from misc.calc_accumulation import calc_accumulation_in_output_currency
+from misc.print import fmt_float
 
 
 def calculate_investment():
@@ -38,7 +39,7 @@ def calculate_investment():
         print("    Gained as interest this year: " +
               f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)}"
               f" {input["output_currency"]}")
-        print(f"    Total: {round(total_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
+        print(f"    Total: {fmt_float(total_in_output_currency)} {input["output_currency"]}")
 
 
 if __name__ == "__main__":

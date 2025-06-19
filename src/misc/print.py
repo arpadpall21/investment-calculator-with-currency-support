@@ -25,3 +25,7 @@ def color_print(
 ):
     end = "\033[0m"
     print(f"{text_color} {message}{end}")
+
+
+def fmt_float(nr: float) -> str:
+    return str(nr)
