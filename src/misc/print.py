@@ -28,8 +28,9 @@ def color_print(
     print(f"{text_color} {message}{end}")
 
 
-def prt(s: str):
-    print(s)
+def prt(msg: str, new_line: bool = False, tabs: int = 0):
+    tab_prefix: str = " " * settings.tab_size * tabs
+    print(tab_prefix + msg)
 
 
 def fmt_float(nr: float) -> str:
