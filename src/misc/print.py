@@ -29,8 +29,10 @@ def color_print(
 
 
 def prt(msg: str, new_line: bool = False, tabs: int = 0):
+    new_line_prefix = "\n" if new_line else ""
     tab_prefix: str = " " * settings.tab_size * tabs
-    print(tab_prefix + msg)
+
+    print(new_line_prefix + tab_prefix + msg)
 
 
 def fmt_float(nr: float) -> str:

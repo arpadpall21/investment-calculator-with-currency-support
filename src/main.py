@@ -11,7 +11,7 @@ def calculate_investment():
         total_accumulation[currency] = value
 
     for investment_year in range(1, input["years_to_invest"]["years"] + 1):
-        prt(f"\nReport at the end of year {investment_year}")
+        prt(f"Report at the end of year {investment_year}", new_line=True)
         yearly_interest_accumulation = {}
 
         for currency, yearly_interest_rate in input["yearly_interest_rate"].items():
