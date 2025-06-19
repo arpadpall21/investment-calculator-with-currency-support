@@ -1,6 +1,5 @@
-from misc.toml_file_reader import read as read_toml_file
+from misc.input import input
 
-input = read_toml_file("./input.toml")
 input_settings = input["settings"]
 
 
