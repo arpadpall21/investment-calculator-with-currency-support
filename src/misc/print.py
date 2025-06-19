@@ -28,5 +28,9 @@ def color_print(
     print(f"{text_color} {message}{end}")
 
 
+def prt(s: str):
+    print(s)
+
+
 def fmt_float(nr: float) -> str:
     return f"{{:{settings.dig_gr_sep}}}".format(round(nr, settings.dec_len))
