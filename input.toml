@@ -20,3 +20,4 @@ EUR = 100
 
 [settings]
 displayed_decimal_length = 2
+digit_grouping_separator = ","
