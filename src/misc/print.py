@@ -1,4 +1,5 @@
 from enum import Enum
+from misc.settings import settings
 
 
 class TextColor(Enum):
@@ -28,4 +29,4 @@ def color_print(
 
 
 def fmt_float(nr: float) -> str:
-    return str(nr)
+    return f"{{:{settings.dig_gr_sep}}}".format(round(nr, settings.dec_len))

@@ -5,7 +5,6 @@ from misc.print import fmt_float
 
 def calculate_investment():
     total_accumulation: dict = {}
-    displayed_decimal_length = input["settings"]["displayed_decimal_length"]
 
     for currency, value in input["start_sum"].items():
         print(f"Start Sum {currency}: {value}")
@@ -20,24 +19,23 @@ def calculate_investment():
 
             gained_as_interest: float = total_accumulation[currency] / 100 * yearly_interest_rate
             yearly_interest_accumulation[currency] = gained_as_interest
-            print(f"    Gained as interest: {round(gained_as_interest, displayed_decimal_length)} {currency}")
+            print(f"    Gained as interest: {fmt_float(gained_as_interest)} {currency}")
 
             total_accumulation[currency] += gained_as_interest
-            print(f"    Total: {round(total_accumulation[currency], displayed_decimal_length)} {currency}")
+            print(f"    Total: {fmt_float(total_accumulation[currency])} {currency}")
 
             if input["yearly_investment"].get(currency):
                 print(f"    Yearly investment: {input["yearly_investment"][currency]} {currency}")
                 total_accumulation[currency] += input["yearly_investment"][currency]
                 print(
                     "    Total including yearly investment: " +
-                    f"{round(total_accumulation[currency], displayed_decimal_length)} {currency}"
+                    f"{fmt_float(total_accumulation[currency])} {currency}"
                 )
 
         total_in_output_currency = calc_accumulation_in_output_currency(total_accumulation)
         total_yearly_interest_in_output_currency = calc_accumulation_in_output_currency(yearly_interest_accumulation)
         print(f"Total in output currency {input["output_currency"]}")
-        print("    Gained as interest this year: " +
-              f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)}"
+        print(f"    Gained as interest this year: {fmt_float(total_yearly_interest_in_output_currency)}"
               f" {input["output_currency"]}")
         print(f"    Total: {fmt_float(total_in_output_currency)} {input["output_currency"]}")
 
