@@ -1,14 +1,9 @@
-from tomllib import load
+from misc.toml_file_reader import read as read_toml_file
 from misc.calc_accumulation import cacl_accumulation_in_output_currency
 
 
-def read_input_toml(path: str):
-    with open(path, "br") as f:
-        return load(f)
-
-
 def calculate_investment():
-    input = read_input_toml("./input.toml")
+    input = read_toml_file("./input.toml")
     total_accumulation: dict = {}
     displayed_decimal_length = input["settings"]["displayed_decimal_length"]
 
@@ -45,11 +40,10 @@ def calculate_investment():
                                                                                         input["exchange_rate"],
                                                                                         input["output_currency"])
         print(f"Total in output currency {input["output_currency"]}")
-        print("    Gained as interest this year: "
-              f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
+        print("    Gained as interest this year: " +
+              f"{round(total_yearly_interest_in_output_currency, displayed_decimal_length)}"
+              f" {input["output_currency"]}")
         print(f"    Total: {round(total_in_output_currency, displayed_decimal_length)} {input["output_currency"]}")
-
-    print(total_accumulation)
 
 
 if __name__ == "__main__":

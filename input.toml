@@ -4,7 +4,7 @@ HUF = 402.80
 RON = 5.03
 
 [years_to_invest]
-years = 3
+years = 5
 [yearly_interest_rate]
 EUR = 1.35
 RON = 5.2
