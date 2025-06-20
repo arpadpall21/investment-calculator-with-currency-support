@@ -16,8 +16,9 @@ RON = 500
 HUF = 40_000
 [yearly_investment]
 EUR = 100
-
+HUF = 21_000
 
 [settings]
 displayed_decimal_length = 2
 digit_grouping_separator = ","
+tab_size = 4
