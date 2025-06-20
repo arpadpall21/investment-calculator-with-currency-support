@@ -6,8 +6,9 @@ from misc.print import prt, fmt_float
 def calculate_investment():
     total_accumulation: dict = {}
 
+    prt("Start Sum:", color="yellow")
     for currency, value in input["start_sum"].items():
-        prt(f"Start Sum {currency}: {fmt_float(value)}")
+        prt(f"{fmt_float(value)} {currency}", tabs=1)
         total_accumulation[currency] = value
 
     for investment_year in range(1, input["years_to_invest"]["years"] + 1):
