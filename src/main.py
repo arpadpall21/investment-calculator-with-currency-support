@@ -31,7 +31,7 @@ def calculate_investment():
             prt(f"Total: {fmt_float(total_accumulation[currency])} {currency}", tabs=1)
 
             if input["yearly_investment"].get(currency):
-                prt(f"Yearly investment: {input["yearly_investment"][currency]} {currency}", tabs=1)
+                prt(f"Yearly investment: {fmt_float(input["yearly_investment"][currency])} {currency}", tabs=1)
                 total_accumulation[currency] += input["yearly_investment"][currency]
                 prt(f"Total including yearly investment: {fmt_float(total_accumulation[currency])} {currency}", tabs=1)
 
