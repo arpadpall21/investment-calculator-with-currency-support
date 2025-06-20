@@ -11,7 +11,7 @@ def calculate_investment():
         prt(f"{fmt_float(value)} {currency}", tabs=1)
         total_accumulation[currency] = value
     prt("Total in output currency: " +
-        fmt_float(calc_accumulation_in_output_currency(input["start_sum"])) +
+        fmt_float(calc_accumulation_in_output_currency(input["start_sum"])) + " " +
         input["output_currency"], color="green", tabs=1)
 
     if len(input["yearly_investment"]) > 0:
@@ -19,7 +19,7 @@ def calculate_investment():
         for currency, value in input["yearly_investment"].items():
             prt(f"{fmt_float(value)} {currency}", tabs=1)
         prt("Total in output currency: " +
-            fmt_float(calc_accumulation_in_output_currency(input["yearly_investment"])) +
+            fmt_float(calc_accumulation_in_output_currency(input["yearly_investment"])) + " " +
             input["output_currency"], color="green", tabs=1)
 
     for investment_year in range(1, input["years_to_invest"]["years"] + 1):
