@@ -7,7 +7,7 @@ def calculate_investment():
     total_accumulation: dict = {}
 
     for currency, value in input["start_sum"].items():
-        prt(f"Start Sum {currency}: {value}")
+        prt(f"Start Sum {currency}: {fmt_float(value)}")
         total_accumulation[currency] = value
 
     for investment_year in range(1, input["years_to_invest"]["years"] + 1):

@@ -1,38 +1,25 @@
-from enum import Enum
 from misc.settings import settings
 
-
-class TextColor(Enum):
-    WHITE = "\x1b[37m"
-    GREEN = "\x1b[32m"
-
-
-class TextStyle(Enum):
-    RESET = "\x1b[0m"
-    BOLD = "\033[1m"
-    UNDERLINE = "\033[4m"
-
-
-class BackgroundColor(Enum):
-    BLACK = "\x1b[40m"
-    RED = "\x1b[41m"
+color = {
+    "text": {
+        "white": "\x1b[37m",
+        "green": "\x1b[32m",
+    },
+    "background": {
+        "black": "\x1b[40m",
+        "red": "\x1b[41m",
+    },
+}
 
 
-def color_print(
-    message: str,
-    text_color: TextColor = TextColor.WHITE,
-    text_style: TextStyle = TextStyle.RESET,
-    background_color: BackgroundColor = BackgroundColor.BLACK
-):
-    end = "\033[0m"
-    print(f"{text_color} {message}{end}")
-
-
-def prt(msg: str, new_line: bool = False, tabs: int = 0):
+def prt(msg: str, new_line: bool = False, tabs: int = 0, text_color: str = "white", bg_color: str = "black"):
     new_line_prefix = "\n" if new_line else ""
     tab_prefix: str = " " * settings.tab_size * tabs
+    text_color = color["text"][text_color]
+    bg_color = color["background"][bg_color]
+    end = "\033[0m"
 
-    print(new_line_prefix + tab_prefix + msg)
+    print(f"{text_color}{new_line_prefix + tab_prefix + msg}{end}")
 
 
 def fmt_float(nr: float) -> str:
