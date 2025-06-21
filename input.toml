@@ -1,25 +1,25 @@
-output_currency = "EUR"
+output_currency = "EUR"   # currency you want to see as total at the end
 [exchange_rate]
-USD = 1.15
+USD = 1.15                # exchange rates to the output currency
 GBP = 0.85
 
-
-[years_to_invest]
+[years_to_invest]         # number of years to invest
 years = 5
-[yearly_interest_rate]
+[yearly_interest_rate]    # interest rate per currency
 EUR = 2.509
 USD = 4.393
 GBP = 4.532
 
-[start_sum]
+[start_sum]               # initial start sum per currency
 EUR = 12_000
 USD = 9_500
 GBP = 14_300
-[yearly_investment]
+[yearly_investment]       # additional sum that will be added at the end each investment year
 EUR = 1_200
-GBP = 6_000
+GBP = 600
 
-[settings]
+
+[settings]                # visual settings (don't change)
 displayed_decimal_length = 2
 digit_grouping_separator = ","
 tab_size = 4
