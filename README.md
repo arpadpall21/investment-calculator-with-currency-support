@@ -1,17 +1,17 @@
-# Investment Calculator With Currency Support
+# Investment Calculator With Currency Exchange Support
 
 ## Description
-- This is an investment calculator that calculates investment for each year based on interest
+- This is an investment calculator that calculates investments for each year based on interest
 - The following features are supported:
-  - Currency exchange: different currencies can be passed then the outcome is calculated to the desired output currency
-  - Yearly investment: a sum (per currency) can be passed that will be added at the end of each year
-- Designed for an international investor who has investment in different currencies, the initial example describes a scenario where the investments are in 3 currencies `EUR`, `USD` and `GBP` then the outcome is calculated in `EUR`
-- Altough this is a command line tool it's designed to be simple for non technical people (the input `.toml` file is easy to read and no project installation required)
+  - Currency exchange: Different currencies can be passed, and the outcome is calculated in the desired output currency
+  - Yearly investment: A sum (per currency) can be passed that will be added at the end of each year
+- Designed for an international investor who has investments in different currencies, the initial example describes a scenario where investments are in three currencies: `EUR`, `USD`, and `GBP`. The outcome is then calculated in `EUR`
+- Although this is a command-line tool, it's designed to be simple for non-technical people (The input `.toml` file is easy to read and change, and no project installation is required)
 
 ## Requirements
  - Python v3.11+
 
-## Setup (for non technical people)
+## Setup (for non-technical people)
 - Download this program 
 ![alt text](./Download.png)
 - Install Python version 3.11 (or higher) [here](https://www.python.org/downloads/)
