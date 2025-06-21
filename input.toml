@@ -18,7 +18,8 @@ GBP = 14_300
 EUR = 1_200
 GBP = 600
 
-[settings]
+
+[settings]                # visual settings (don't change)
 displayed_decimal_length = 2
 digit_grouping_separator = ","
 tab_size = 4
