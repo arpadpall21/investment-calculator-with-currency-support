@@ -6,6 +6,7 @@ from misc.print import prt, fmt_float
 def invest():
     accumulation: dict = {"total_in_output_currency": 0, "accumulated_interest_in_output_currency": 0}
     total_start_sum_in_output_currency: float = 0
+    yearly_interest_accumulator = {"total_in_output_currency": 0}
 
     prt("Start sum:", color="yellow")
     for currency, value in input_toml["start_sum"].items():
@@ -32,16 +33,21 @@ def invest():
 
     for investment_year in range(1, input_toml["years_to_invest"]["years"] + 1):
         prt(f"Report at the end of year {investment_year}", new_line=True, color="magenta")
-        yearly_interest_accumulation_in_output_currency: float = 0
 
         for currency, yearly_interest_rate in input_toml["yearly_interest_rate"].items():
             prt(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)", color="yellow")
 
             gained_as_interest_this_year: float = accumulation[currency]["total"] / 100 * yearly_interest_rate
-            yearly_interest_accumulation_in_output_currency += to_output_currency(
+            yearly_interest_accumulator["total_in_output_currency"] += to_output_currency(
                 gained_as_interest_this_year, currency,
             )
+
+            if yearly_interest_accumulator.get(currency) is None:
+                yearly_interest_accumulator[currency] = 0
+            yearly_interest_accumulator[currency] += gained_as_interest_this_year
+
             prt(f"Gained as interest this year: {fmt_float(gained_as_interest_this_year)} {currency}", tabs=1)
+            prt(f"Gained as interest from start: {fmt_float(yearly_interest_accumulator[currency])} {currency}", tabs=1)
 
             accumulation[currency]["total"] += gained_as_interest_this_year
             accumulation[currency]["accumulated_interest"] = gained_as_interest_this_year
@@ -73,7 +79,7 @@ def invest():
         )
         prt(f"Total in output currency {input_toml["output_currency"]}", color="green")
         prt(
-            f"Gained as interest this year: {fmt_float(yearly_interest_accumulation_in_output_currency)} " +
+            f"Gained as interest this year: {fmt_float(yearly_interest_accumulator["total_in_output_currency"])} " +
             f"{input_toml["output_currency"]}",
             tabs=1,
             color="green",
