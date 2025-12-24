@@ -60,10 +60,28 @@ def invest():
                 )
 
                 prt(f"Yearly investment: {fmt_float(input_toml["yearly_investment"][currency])} {currency}", tabs=1)
-                prt(f"Total including yearly investment: {fmt_float(accumulation[currency]["total"])} {currency}", tabs=2)
+                prt(
+                    f"Total including yearly investment: {fmt_float(accumulation[currency]["total"])} {currency}",
+                    tabs=2,
+                )
 
+        interest_from_start_in_output_currency: float = accumulation["accumulated_interest_in_output_currency"]
+        interest_from_start_in_percent: float = fmt_float(
+            interest_from_start_in_output_currency / total_start_sum_in_output_currency * 100
+        )
         prt(f"Total in output currency {input_toml["output_currency"]}", color="green")
-        prt(f"Total: {fmt_float(accumulation["total_in_output_currency"])} {input_toml["output_currency"]}", tabs=2, color="green")
+        prt(
+            "Gained as interest from start: " +
+            f"{fmt_float(interest_from_start_in_output_currency)} {input_toml["output_currency"]} " +
+            f"({interest_from_start_in_percent}%)",
+            tabs=1,
+            color="green",
+        )
+        prt(
+            f"Total: {fmt_float(accumulation["total_in_output_currency"])} {input_toml["output_currency"]}",
+            tabs=2,
+            color="green",
+        )
 
 
 if __name__ == "__main__":
