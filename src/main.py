@@ -32,13 +32,15 @@ def invest():
 
     for investment_year in range(1, input_toml["years_to_invest"]["years"] + 1):
         prt(f"Report at the end of year {investment_year}", new_line=True, color="magenta")
-        yearly_interest_accumulation = {}
+        yearly_interest_accumulation_in_output_currency: float = 0
 
         for currency, yearly_interest_rate in input_toml["yearly_interest_rate"].items():
             prt(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)", color="yellow")
 
             gained_as_interest_this_year: float = accumulation[currency]["total"] / 100 * yearly_interest_rate
-            yearly_interest_accumulation[currency] = gained_as_interest_this_year
+            yearly_interest_accumulation_in_output_currency += to_output_currency(
+                gained_as_interest_this_year, currency,
+            )
             prt(f"Gained as interest this year: {fmt_float(gained_as_interest_this_year)} {currency}", tabs=1)
 
             accumulation[currency]["total"] += gained_as_interest_this_year
@@ -70,6 +72,12 @@ def invest():
             interest_from_start_in_output_currency / total_start_sum_in_output_currency * 100
         )
         prt(f"Total in output currency {input_toml["output_currency"]}", color="green")
+        prt(
+            f"Gained as interest this year: {fmt_float(yearly_interest_accumulation_in_output_currency)} " +
+            f"{input_toml["output_currency"]}",
+            tabs=1,
+            color="green",
+        )
         prt(
             "Gained as interest from start: " +
             f"{fmt_float(interest_from_start_in_output_currency)} {input_toml["output_currency"]} " +
