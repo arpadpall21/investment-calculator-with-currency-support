@@ -46,10 +46,11 @@ def invest():
             prt(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)", color="yellow")
 
             gained_as_interest_this_year: float = accumulation[currency]["total"] / 100 * yearly_interest_rate
-            accumulator.total_end_sum_in_output_currency += to_output_currency(
+            val_in_output_currency: float = to_output_currency(
                 gained_as_interest_this_year, currency,
             )
-            
+            accumulator.total_end_sum_in_output_currency += val_in_output_currency
+            accumulator.total_accumulated_interest_in_output_currency += val_in_output_currency
             
             yearly_interest_accumulator["total_in_output_currency"] += to_output_currency(
                 gained_as_interest_this_year, currency,
@@ -86,10 +87,7 @@ def invest():
                     tabs=2,
                 )
 
-        interest_from_start_in_output_currency: float = accumulation["accumulated_interest_in_output_currency"]
-        interest_from_start_in_percent: float = fmt_float(
-            interest_from_start_in_output_currency / accumulator.total_start_sum_in_output_currency * 100
-        )
+
         prt(f"Total in output currency {input_toml["output_currency"]}", color="green")
         prt(
             f"Gained as interest this year: {fmt_float(yearly_interest_accumulator["total_in_output_currency"])} " +
@@ -99,8 +97,10 @@ def invest():
         )
         prt(
             "Gained as interest from start: " +
-            f"{fmt_float(interest_from_start_in_output_currency)} {input_toml["output_currency"]} " +
-            f"({interest_from_start_in_percent}%)",
+            f"{fmt_float(accumulator.total_accumulated_interest_in_output_currency)} {input_toml["output_currency"]} " +
+            f"({fmt_float(
+                accumulator.total_accumulated_interest_in_output_currency / accumulator.total_start_sum_in_output_currency * 100
+            )}%)",
             tabs=1,
             color="green",
         )
