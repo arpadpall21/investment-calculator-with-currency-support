@@ -1,21 +1,23 @@
 from misc.input import input_toml
 from misc.calc_accumulation import to_output_currency
 from misc.print import prt, fmt_float
+from misc.models import Accumulator
 
 
 def invest():
+    accumulator: Accumulator = Accumulator()
+    
+    
     accumulation: dict = {"total_in_output_currency": 0, "accumulated_interest_in_output_currency": 0}
-    total_start_sum_in_output_currency: float = 0
     yearly_interest_accumulator = {"total_in_output_currency": 0}
 
     prt("Start sum:", color="yellow")
     for currency, value in input_toml["start_sum"].items():
         accumulation[currency] = {"total": value, "accumulated_interest": 0}
-        total_start_sum_in_output_currency += to_output_currency(value, currency)
+        accumulator.total_start_sum_in_output_currency += to_output_currency(value, currency)
         prt(f"{fmt_float(value)} {currency}", tabs=1)
 
-    accumulation["total_in_output_currency"] += total_start_sum_in_output_currency
-    prt(f"Total in output currency: {fmt_float(total_start_sum_in_output_currency)}", color="green", tabs=2)
+    prt(f"Total in output currency: {fmt_float(accumulator.total_start_sum_in_output_currency)}", color="green", tabs=2)
 
     if len(input_toml["yearly_investment"]) > 0:
         prt("Yearly investment:", color="yellow")
