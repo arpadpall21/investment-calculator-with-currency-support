@@ -56,9 +56,12 @@ def invest():
             accumulator.total_accumulated_interest_in_output_currency += interest_in_output_currency
 
             prt(f"Gained as interest this year: {fmt_float(interest)} {currency}", tabs=1)
-            prt(    # TODO (calc percent)
+            prt(
                 "Gained as interest from start: " +
-                f"{fmt_float(accumulator.per_currency[currency].total_accumulated_interest)} {currency}",
+                f"{fmt_float(accumulator.per_currency[currency].total_accumulated_interest)} {currency} " +
+                f"({fmt_float(
+                    accumulator.per_currency[currency].total_accumulated_interest / input_toml["start_sum"][currency] * 100
+                )}%)",
                 tabs=1,
             )
 

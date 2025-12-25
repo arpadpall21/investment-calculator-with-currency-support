@@ -9,14 +9,13 @@ years = 3
 [yearly_interest_rate]    # interest rate per currency
 HUF = 6.50
 RON = 6.75
-# EUR = 7
 
 [start_sum]               # initial start sum per currency
 HUF = 35_000_000
 RON = 500_000
-# EUR = 100_000
+
 [yearly_investment]       # additional sum that will be added at the end each investment year
-HUF = 8_000_000
+HUF = 5_000_000
 # RON = 10_000
 
 [settings]                # visual settings (don't change)
