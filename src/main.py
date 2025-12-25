@@ -5,6 +5,7 @@ from misc.models import Accumulator
 
 
 def invest():
+    output_currency: str = input_toml["output_currency"]
     accumulator: Accumulator = Accumulator()
     
     
@@ -46,15 +47,13 @@ def invest():
             prt(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)", color="yellow")
 
             gained_as_interest_this_year: float = accumulation[currency]["total"] / 100 * yearly_interest_rate
-            val_in_output_currency: float = to_output_currency(
+            interest_in_output_currency: float = to_output_currency(
                 gained_as_interest_this_year, currency,
             )
-            accumulator.total_end_sum_in_output_currency += val_in_output_currency
-            accumulator.total_accumulated_interest_in_output_currency += val_in_output_currency
+            accumulator.total_end_sum_in_output_currency += interest_in_output_currency
+            accumulator.total_accumulated_interest_in_output_currency += interest_in_output_currency
             
-            yearly_interest_accumulator["total_in_output_currency"] += to_output_currency(
-                gained_as_interest_this_year, currency,
-            )
+            
 
             if yearly_interest_accumulator.get(currency) is None:
                 yearly_interest_accumulator[currency] = 0
@@ -69,35 +68,33 @@ def invest():
                 gained_as_interest_this_year,
                 currency
             )
-            accumulation["total_in_output_currency"] += gained_as_interest_this_year_in_output_currency
-            accumulation["accumulated_interest_in_output_currency"] += gained_as_interest_this_year_in_output_currency
+            accumulator.total_end_sum_in_output_currency += gained_as_interest_this_year_in_output_currency
+            accumulator.total_accumulated_interest_in_output_currency += gained_as_interest_this_year_in_output_currency
 
             prt(f"Total: {fmt_float(accumulation[currency]["total"])} {currency}", tabs=2)
 
             if input_toml["yearly_investment"].get(currency):
-                accumulation[currency]["total"] += input_toml["yearly_investment"][currency]
-                accumulation["total_in_output_currency"] += to_output_currency(
-                    input_toml["yearly_investment"][currency],
-                    currency,
-                )
+                yearly_investment: float = input_toml["yearly_investment"][currency]
 
-                prt(f"Yearly investment: {fmt_float(input_toml["yearly_investment"][currency])} {currency}", tabs=1)
+                accumulation[currency]["total"] += yearly_investment
+                accumulator.total_start_sum_in_output_currency += to_output_currency(yearly_investment, currency)
+
+                prt(f"Yearly investment: {fmt_float(yearly_investment)} {currency}", tabs=1)
                 prt(
                     f"Total including yearly investment: {fmt_float(accumulation[currency]["total"])} {currency}",
                     tabs=2,
                 )
 
-
-        prt(f"Total in output currency {input_toml["output_currency"]}", color="green")
-        prt(
-            f"Gained as interest this year: {fmt_float(yearly_interest_accumulator["total_in_output_currency"])} " +
-            f"{input_toml["output_currency"]}",
-            tabs=1,
-            color="green",
-        )
+        prt(f"Total in output currency {output_currency}", color="green")
+        # prt(      # TODO...
+        #     f"Gained as interest this year: {fmt_float(accumulator.total_accumulated_interest_in_output_currency)} " +
+        #     f"{output_currency}",
+        #     tabs=1,
+        #     color="green",
+        # )
         prt(
             "Gained as interest from start: " +
-            f"{fmt_float(accumulator.total_accumulated_interest_in_output_currency)} {input_toml["output_currency"]} " +
+            f"{fmt_float(accumulator.total_accumulated_interest_in_output_currency)} {output_currency} " +
             f"({fmt_float(
                 accumulator.total_accumulated_interest_in_output_currency / accumulator.total_start_sum_in_output_currency * 100
             )}%)",
@@ -105,7 +102,7 @@ def invest():
             color="green",
         )
         prt(
-            f"Total: {fmt_float(accumulator.total_end_sum_in_output_currency)} {input_toml["output_currency"]}",
+            f"Total: {fmt_float(accumulator.total_end_sum_in_output_currency)} {output_currency}",
             tabs=2,
             color="green",
         )
