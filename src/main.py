@@ -56,11 +56,12 @@ def invest():
             accumulator.total_accumulated_interest_in_output_currency += interest_in_output_currency
 
             prt(f"Gained as interest this year: {fmt_float(interest)} {currency}", tabs=1)
+            start_sum: float = input_toml["start_sum"][currency] if input_toml["start_sum"][currency] > 0 else 1
             prt(
                 "Gained as interest from start: " +
                 f"{fmt_float(accumulator.per_currency[currency].total_accumulated_interest)} {currency} " +
                 f"({fmt_float(
-                    accumulator.per_currency[currency].total_accumulated_interest / input_toml["start_sum"][currency] * 100
+                    accumulator.per_currency[currency].total_accumulated_interest / start_sum * 100
                 )}%)",
                 tabs=1,
             )
@@ -88,11 +89,16 @@ def invest():
         #     tabs=1,
         #     color="green",
         # )
+        total_start_sum_in_output_currency: float = (
+            accumulator.total_start_sum_in_output_currency
+            if accumulator.total_start_sum_in_output_currency > 0
+            else 1
+        )
         prt(
             "Gained as interest from start: " +
             f"{fmt_float(accumulator.total_accumulated_interest_in_output_currency)} {output_currency} " +
             f"({fmt_float(
-                accumulator.total_accumulated_interest_in_output_currency / accumulator.total_start_sum_in_output_currency * 100
+                accumulator.total_accumulated_interest_in_output_currency / total_start_sum_in_output_currency * 100
             )}%)",
             tabs=1,
             color="green",
