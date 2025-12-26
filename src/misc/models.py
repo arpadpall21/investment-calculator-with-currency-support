@@ -2,14 +2,12 @@ from dataclasses import dataclass, field
 
 
 @dataclass
-class AccumulatorPerCurrency:
-    total_accumulated: float = 0.0
-    total_accumulated_interest: float = 0.0
+class Accumulator:
+    capital: float = 0.0
+    interest: float = 0.0
 
 
 @dataclass
-class Accumulator:
-    total_start_sum_in_output_currency: float = 0.0
-    total_accumulated_in_output_currency: float = 0.0
-    total_accumulated_interest_in_output_currency: float = 0.0
-    per_currency: dict[str, AccumulatorPerCurrency] = field(default_factory=dict)
+class Bank:
+    per_currency: dict[str, Accumulator] = field(default_factory=dict)
+    total_in_output_currency: Accumulator = field(default_factory=Accumulator)
