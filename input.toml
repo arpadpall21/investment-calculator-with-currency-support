@@ -15,8 +15,8 @@ HUF = 35_000_000
 RON = 500_000
 
 [yearly_investment]       # additional sum that will be added at the end each investment year
-HUF = 4_000_000
-# RON = 10_000
+HUF = 1_000_000
+RON = 10_000
 
 [settings]                # visual settings (don't change)
 displayed_decimal_length = 2
