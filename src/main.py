@@ -8,14 +8,12 @@ def invest():
     start_currencies: set[str] = set(input_toml["start_sum"].keys())
     interest_rates: set[str] = set(input_toml["yearly_interest_rate"].keys())
     exchange_rates: set[str] = set(input_toml["exchange_rate"].keys())
+    exchange_rates.add(input_toml["output_currency"])
 
-    missing_interest_rates: set[str] = start_currencies - interest_rates
-    if len(missing_interest_rates) > 0:
+    if missing_interest_rates := start_currencies - interest_rates:
         raise ValueError(f"Interest rate missing for currencies {missing_interest_rates}")
-
-
-
-
+    if missing_exchange_rates := start_currencies - exchange_rates:
+        raise ValueError(f"Exchange rate missing for currencies {missing_exchange_rates}")
 
     output_currency: str = input_toml["output_currency"]
     bank: Bank = Bank()
