@@ -11,13 +11,15 @@ def invest():
     # start sum
     prt("Start sum:", color="yellow")
     for currency, value in input_toml["start_sum"].items():
-        bank.per_currency[currency] = Accumulator(capital=value)
-        bank.total_in_output_currency.capital += to_output_currency(value, currency)
+        val_in_output_currency: float = to_output_currency(value, currency)
+        bank.per_currency[currency] = Accumulator(net_investment=value, current_accumulation=value)
+        bank.total_in_output_currency.net_investment += val_in_output_currency
+        bank.total_in_output_currency.current_accumulation += val_in_output_currency
 
         prt(f"{fmt_float(value)} {currency}", tabs=1)
 
     prt(
-        f"Total in output currency: {fmt_float(bank.total_in_output_currency.capital)} {output_currency}",
+        f"Total in output currency: {fmt_float(bank.total_in_output_currency.net_investment)} {output_currency}",
         color="green",
         tabs=2,
     )
@@ -45,33 +47,36 @@ def invest():
         for currency, yearly_interest_rate in input_toml["yearly_interest_rate"].items():
             prt(f"Currency: {currency} (yearly interest rate: {yearly_interest_rate}%)", color="yellow")
 
-            interest: float = bank.per_currency[currency].capital / 100 * yearly_interest_rate
+            interest: float = bank.per_currency[currency].current_accumulation / 100 * yearly_interest_rate
             interest_in_output_currency: float = to_output_currency(interest, currency)
 
-            bank.per_currency[currency].capital += interest
-            bank.per_currency[currency].interest += interest
-            bank.total_in_output_currency.capital += interest_in_output_currency
-            bank.total_in_output_currency.interest += interest_in_output_currency
+            bank.per_currency[currency].current_accumulation += interest
+            bank.per_currency[currency].current_accumulated_interest += interest
+            bank.total_in_output_currency.current_accumulation += interest_in_output_currency
+            bank.total_in_output_currency.current_accumulated_interest += interest_in_output_currency
             total_yearly_interest_in_output_currency += interest_in_output_currency
 
             prt(f"Interest this year: {fmt_float(interest)} {currency}", tabs=1)
             prt(
                 "Interest total: " +
-                f"{fmt_float(bank.per_currency[currency].interest)} {currency}",
+                f"{fmt_float(bank.per_currency[currency].current_accumulated_interest)} {currency}",
                 tabs=1,
             )
-
-            prt(f"Total: {fmt_float(bank.per_currency[currency].capital)} {currency}", tabs=2)
+            prt(f"Total: {fmt_float(bank.per_currency[currency].current_accumulation)} {currency}", tabs=2)
 
             if input_toml["yearly_investment"].get(currency):
                 yearly_investment: float = input_toml["yearly_investment"][currency]
-                bank.per_currency[currency].capital += yearly_investment
-                bank.total_in_output_currency.capital += to_output_currency(yearly_investment, currency)
+                yearly_investment_in_output_currency: float = to_output_currency(yearly_investment, currency)
+
+                bank.per_currency[currency].current_accumulation += yearly_investment
+                bank.per_currency[currency].net_investment += yearly_investment
+                bank.total_in_output_currency.current_accumulation += yearly_investment_in_output_currency
+                bank.total_in_output_currency.net_investment += yearly_investment_in_output_currency
 
                 prt(f"Yearly investment: {fmt_float(yearly_investment)} {currency}", tabs=1)
                 prt(
                     "Total including yearly investment: " +
-                    f"{fmt_float(bank.per_currency[currency].capital)} {currency}",
+                    f"{fmt_float(bank.per_currency[currency].current_accumulation)} {currency}",
                     tabs=2,
                 )
 
@@ -83,12 +88,12 @@ def invest():
             color="green",
         )
         prt(
-            f"Interest total: {fmt_float(bank.total_in_output_currency.interest)} {output_currency} ",
+            f"Interest total: {fmt_float(bank.total_in_output_currency.current_accumulated_interest)} {output_currency} ",
             tabs=1,
             color="green",
         )
         prt(
-            f"Total: {fmt_float(bank.total_in_output_currency.capital)} {output_currency}",
+            f"Total: {fmt_float(bank.total_in_output_currency.current_accumulation)} {output_currency}",
             tabs=2,
             color="green",
         )

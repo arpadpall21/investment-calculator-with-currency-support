@@ -3,8 +3,9 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Accumulator:
-    capital: float = 0.0
-    interest: float = 0.0
+    net_investment: float = 0.0
+    current_accumulation: float = 0.0
+    current_accumulated_interest: float = 0.0
 
 
 @dataclass
