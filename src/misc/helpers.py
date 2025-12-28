@@ -37,3 +37,15 @@ def to_output_currency(val: float, currency: str) -> float:
 
 def fmt_float(nr: float) -> str:
     return f"{{:{settings.dig_gr_sep}}}".format(round(nr, settings.dec_len))
+
+
+def pre_check() -> None:
+    start_currencies: set[str] = set(input_toml["start_sum"].keys())
+    interest_rates: set[str] = set(input_toml["yearly_interest_rate"].keys())
+    exchange_rates: set[str] = set(input_toml["exchange_rate"].keys())
+    exchange_rates.add(input_toml["output_currency"])
+
+    if missing_interest_rates := start_currencies - interest_rates:
+        raise ValueError(f"Interest rate missing for currencies {missing_interest_rates}")
+    if missing_exchange_rates := start_currencies - exchange_rates:
+        raise ValueError(f"Exchange rate missing for currencies {missing_exchange_rates}")
