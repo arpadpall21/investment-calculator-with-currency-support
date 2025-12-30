@@ -51,7 +51,6 @@ def pre_check() -> None:
 def get_total_interest_gained_relative_to_net_investment(bank: Bank, currency: str) -> float:
     if bank.per_currency[currency].net_investment == 0:
         return 0
-
     return bank.per_currency[currency].current_accumulated_interest / bank.per_currency[currency].net_investment * 100
 
 

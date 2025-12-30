@@ -22,3 +22,6 @@
   - You can use any currency name you want (ex: `EUR`, `Euro`, `MyCurrency`), but **use the same name per currency**
 - Open terminal in the program folder [here](https://johnwargo.com/posts/2024/launch-windows-terminal/)
 - Type `python src/main.py` then press `[ENTER]`
+
+## Note for technical people
+- run `ruff format` to code formatting (ruff needs to be installed globally)
