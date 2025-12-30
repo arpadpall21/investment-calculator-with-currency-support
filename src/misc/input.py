@@ -6,4 +6,4 @@ def read_toml_file(path: str):
         return load(f)
 
 
-input = read_toml_file("./input.toml")
+input_toml: dict = read_toml_file("./input.toml")

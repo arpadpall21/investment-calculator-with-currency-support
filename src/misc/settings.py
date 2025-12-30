@@ -1,6 +1,6 @@
-from misc.input import input
+from misc.input import input_toml
 
-input_settings = input["settings"]
+input_settings = input_toml["settings"]
 
 
 class Settings:
