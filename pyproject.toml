@@ -1,0 +1,4 @@
+[tool.ruff]
+lint.select = ["E", "F", "W", "C"]
+
+line-length = 120

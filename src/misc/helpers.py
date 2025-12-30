@@ -2,11 +2,7 @@ from misc.input import input_toml
 from misc.settings import settings
 from misc.models import Bank
 
-TEXT_COLOR: dict[str, str] = {
-    "green": "\x1b[32m",
-    "yellow": "\x1b[33m",
-    "magenta": "\x1b[35m"
-}
+TEXT_COLOR: dict[str, str] = {"green": "\x1b[32m", "yellow": "\x1b[33m", "magenta": "\x1b[35m"}
 
 
 def prt(msg: str, new_line: bool = False, tabs: int = 0, color: str = ""):
@@ -15,7 +11,7 @@ def prt(msg: str, new_line: bool = False, tabs: int = 0, color: str = ""):
 
     if color:
         if not TEXT_COLOR.get(color):
-            raise ValueError(f"Color not supported: \"{color}\"")
+            raise ValueError(f'Color not supported: "{color}"')
 
         print(f"{TEXT_COLOR[color]}{new_line_prefix + tab_prefix + msg}\033[0m")
         return
@@ -56,11 +52,7 @@ def get_total_interest_gained_relative_to_net_investment(bank: Bank, currency: s
     if bank.per_currency[currency].net_investment == 0:
         return 0
 
-    return (
-        bank.per_currency[currency].current_accumulated_interest /
-        bank.per_currency[currency].net_investment *
-        100
-    )
+    return bank.per_currency[currency].current_accumulated_interest / bank.per_currency[currency].net_investment * 100
 
 
 def process_yearly_investment(bank: Bank, currency: str) -> float | None:

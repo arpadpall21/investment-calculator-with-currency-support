@@ -65,14 +65,13 @@ def invest():
 
             yearly_investment: float | None = process_yearly_investment(bank, currency)
             total_interest_gained_relative_to_net_investment = get_total_interest_gained_relative_to_net_investment(
-                bank,
-                currency
+                bank, currency
             )
             prt(f"Interest this year: {fmt_float(interest)} {currency}", tabs=1)
             prt(
-                "Interest total: " +
-                f"{fmt_float(bank.per_currency[currency].current_accumulated_interest)} {currency} " +
-                f"({fmt_float(total_interest_gained_relative_to_net_investment)}% of net investment)",
+                "Interest total: "
+                + f"{fmt_float(bank.per_currency[currency].current_accumulated_interest)} {currency} "
+                + f"({fmt_float(total_interest_gained_relative_to_net_investment)}% of net investment)",
                 tabs=1,
             )
             prt(f"Total: {fmt_float(bank.per_currency[currency].current_accumulation)} {currency}", tabs=2)
@@ -80,27 +79,27 @@ def invest():
             if yearly_investment is not None:
                 prt(f"Yearly investment: {fmt_float(yearly_investment)} {currency}", tabs=1)
                 prt(
-                    "Total including yearly investment: " +
-                    f"{fmt_float(bank.per_currency[currency].current_accumulation)} {currency}",
+                    "Total including yearly investment: "
+                    + f"{fmt_float(bank.per_currency[currency].current_accumulation)} {currency}",
                     tabs=2,
                 )
 
         total_interest_gained_relative_to_net_investment_in_output_currency: float = (
-            bank.total_in_output_currency.current_accumulated_interest /
-            bank.total_in_output_currency.net_investment *
-            100
+            bank.total_in_output_currency.current_accumulated_interest
+            / bank.total_in_output_currency.net_investment
+            * 100
         )
         prt(f"Total in output currency {output_currency}", color="green")
         prt(
-            f"Gained as interest this year: {fmt_float(total_yearly_interest_in_output_currency)} " +
-            f"{output_currency}",
+            f"Gained as interest this year: {fmt_float(total_yearly_interest_in_output_currency)} "
+            + f"{output_currency}",
             tabs=1,
             color="green",
         )
         prt(
-            f"Interest total: {fmt_float(bank.total_in_output_currency.current_accumulated_interest)} " +
-            f"{output_currency} " +
-            f"({fmt_float(total_interest_gained_relative_to_net_investment_in_output_currency)}% of net investment)",
+            f"Interest total: {fmt_float(bank.total_in_output_currency.current_accumulated_interest)} "
+            + f"{output_currency} "
+            + f"({fmt_float(total_interest_gained_relative_to_net_investment_in_output_currency)}% of net investment)",
             tabs=1,
             color="green",
         )
