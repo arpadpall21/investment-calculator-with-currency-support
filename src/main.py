@@ -4,7 +4,8 @@ from misc.helpers import (
     prt,
     fmt_float,
     pre_check,
-    get_total_interest_gained_relative_to_net_investment
+    get_total_interest_gained_relative_to_net_investment,
+    process_yearly_investment,
 )
 from misc.models import Bank, Accumulator
 
@@ -62,6 +63,7 @@ def invest():
             bank.total_in_output_currency.current_accumulated_interest += interest_in_output_currency
             total_yearly_interest_in_output_currency += interest_in_output_currency
 
+            yearly_investment: float | None = process_yearly_investment(bank, currency)
             total_interest_gained_relative_to_net_investment = get_total_interest_gained_relative_to_net_investment(
                 bank,
                 currency
@@ -75,15 +77,7 @@ def invest():
             )
             prt(f"Total: {fmt_float(bank.per_currency[currency].current_accumulation)} {currency}", tabs=2)
 
-            if input_toml["yearly_investment"].get(currency):
-                yearly_investment: float = input_toml["yearly_investment"][currency]
-                yearly_investment_in_output_currency: float = to_output_currency(yearly_investment, currency)
-
-                bank.per_currency[currency].current_accumulation += yearly_investment
-                bank.per_currency[currency].net_investment += yearly_investment
-                bank.total_in_output_currency.current_accumulation += yearly_investment_in_output_currency
-                bank.total_in_output_currency.net_investment += yearly_investment_in_output_currency
-
+            if yearly_investment is not None:
                 prt(f"Yearly investment: {fmt_float(yearly_investment)} {currency}", tabs=1)
                 prt(
                     "Total including yearly investment: " +

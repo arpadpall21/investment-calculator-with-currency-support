@@ -61,3 +61,17 @@ def get_total_interest_gained_relative_to_net_investment(bank: Bank, currency: s
         bank.per_currency[currency].net_investment *
         100
     )
+
+
+def process_yearly_investment(bank: Bank, currency: str) -> float | None:
+    if input_toml["yearly_investment"].get(currency):
+        yearly_investment: float = input_toml["yearly_investment"][currency]
+        yearly_investment_in_output_currency: float = to_output_currency(yearly_investment, currency)
+
+        bank.per_currency[currency].current_accumulation += yearly_investment
+        bank.per_currency[currency].net_investment += yearly_investment
+        bank.total_in_output_currency.current_accumulation += yearly_investment_in_output_currency
+        bank.total_in_output_currency.net_investment += yearly_investment_in_output_currency
+
+        return yearly_investment
+    return None
