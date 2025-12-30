@@ -1,11 +1,16 @@
 from misc.input import input_toml
-from misc.helpers import to_output_currency, prt, fmt_float, pre_check
+from misc.helpers import (
+    to_output_currency,
+    prt,
+    fmt_float,
+    pre_check,
+    get_total_interest_gained_relative_to_net_investment
+)
 from misc.models import Bank, Accumulator
 
 
 def invest():
     pre_check()
-
     output_currency: str = input_toml["output_currency"]
     bank: Bank = Bank()
 
@@ -57,10 +62,9 @@ def invest():
             bank.total_in_output_currency.current_accumulated_interest += interest_in_output_currency
             total_yearly_interest_in_output_currency += interest_in_output_currency
 
-            total_interest_gained_relative_to_net_investment: float = (
-                bank.per_currency[currency].current_accumulated_interest /
-                bank.per_currency[currency].net_investment *
-                100
+            total_interest_gained_relative_to_net_investment = get_total_interest_gained_relative_to_net_investment(
+                bank,
+                currency
             )
             prt(f"Interest this year: {fmt_float(interest)} {currency}", tabs=1)
             prt(
