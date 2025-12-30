@@ -1,27 +1,25 @@
 output_currency = "EUR"   # currency you want to see as total at the end
 
 [start_sum]               # initial start sum per currency
-# HUF = 35_000_000
-# RON = 500_000
-EUR = 0
-
+EUR = 12_000
+USD = 9_500
+GBP = 14_300
 
 [yearly_interest_rate]    # interest rate per currency
-# HUF = 6.5
-# RON = 6.75
-EUR = 7
+EUR = 2.509
+USD = 4.393
+GBP = 4.532
 
 [years_to_invest]         # number of years to invest
 years = 5
 
 [yearly_investment]       # additional sum that will be added at the end each investment year
-# HUF = 8_000_000
-EUR = 1_000
+EUR = 1_200
+GBP = 600
 
-[exchange_rate]
-# RON = 5.09
-# HUF = 391
-# USD = 1.15                # exchange rates to the output currency
+[exchange_rate]           # exchange rates to the output currency
+USD = 1.15
+GBP = 0.85
 
 [settings]                # visual settings (don't change)
 displayed_decimal_length = 2
